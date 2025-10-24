@@ -55,9 +55,7 @@ System.out.println("""
     }
     else 
         System.out.println("valeur fausse!");
-    System.out.println("Le resultat est:"+ result);
-    
-    
+    System.out.println("Le resultat est:"+ result); 
     }
 }
    
