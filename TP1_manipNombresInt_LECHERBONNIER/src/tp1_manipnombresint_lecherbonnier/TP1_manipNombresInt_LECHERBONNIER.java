@@ -24,8 +24,20 @@ public class TP1_manipNombresInt_LECHERBONNIER {
         System.out.println("Entrer le deuxieme nombre: ");
         var2=sc.nextInt();
         System.out.println(var1+var2);
-        System.out.println(var1/var2);
-        System.out.println(var1%var2);
+        System.out.println(var1-var2);
+        System.out.println(var1*var2);
+        if (var2==0){
+            System.out.println("La division est impossible");
+        }
+        else{
+            System.out.println(var1/var2);
+        }
+        if (var2==0){
+            System.out.println("La division est impossible");
+        }
+        else{
+            System.out.println(var1%var2);
     }
     
+    }
 }
