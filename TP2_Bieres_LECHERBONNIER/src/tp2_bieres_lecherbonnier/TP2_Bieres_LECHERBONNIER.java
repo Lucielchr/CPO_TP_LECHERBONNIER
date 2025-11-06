@@ -17,20 +17,26 @@ public class TP2_Bieres_LECHERBONNIER {
         BouteilleBiere uneBiere = new BouteilleBiere("Cuvee des trolls", 
 7.0 ,"Dubuisson") ;
         uneBiere.lireEtiquette(); 
-        System.out.println(uneBiere) ; 
+        uneBiere.Decapsuler();
+        uneBiere.Decapsuler();
+        System.out.println(uneBiere) ;
         BouteilleBiere uneSecondeBiere = new BouteilleBiere("Leffe", 
 6.6 ,"Abbaye de Leffe") ;
+        uneSecondeBiere.Decapsuler();
         uneSecondeBiere.lireEtiquette(); 
         System.out.println(uneSecondeBiere) ; 
         BouteilleBiere uneTroisiemeBiere = new BouteilleBiere("Chouffe", 
 8.0 ,"Dubuisson") ;
-        uneTroisiemeBiere.lireEtiquette(); 
+        uneTroisiemeBiere.lireEtiquette();
+        uneTroisiemeBiere.Decapsuler();
         System.out.println(uneTroisiemeBiere) ; 
         BouteilleBiere uneQuatriemeBiere = new BouteilleBiere("Amsterdam", 
 8.5 ,"Brewery Amsterdam") ;
         uneQuatriemeBiere.lireEtiquette(); 
+        uneQuatriemeBiere.Decapsuler();
         System.out.println(uneQuatriemeBiere) ; 
-        
+       
+
 
     }
     
