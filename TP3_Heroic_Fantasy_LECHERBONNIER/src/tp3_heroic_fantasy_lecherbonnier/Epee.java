@@ -11,7 +11,7 @@ package tp3_heroic_fantasy_lecherbonnier;
 public class Epee extends Arme {
     int finesse; 
     
-    public Epee(String nom, int niveauAttaque) {
+    public Epee(String nom, int niveauAttaque, int finesse) {
         super(nom, niveauAttaque);
         if (finesse <= 100) {
             this.finesse = finesse;
