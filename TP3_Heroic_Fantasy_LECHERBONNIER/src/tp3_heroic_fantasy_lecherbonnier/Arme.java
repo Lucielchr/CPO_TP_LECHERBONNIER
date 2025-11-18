@@ -8,7 +8,7 @@ package tp3_heroic_fantasy_lecherbonnier;
  *
  * @author lucie
  */
-public class Arme {
+public abstract class Arme {
     String nom ;
     int niveauAttaque; 
     
