@@ -9,20 +9,22 @@ package tp3_heroic_fantasy_lecherbonnier;
  * @author lucie
  */
 
+import Armes.Arme;
 import java.util.ArrayList;
         
-public abstract class Personnage {
+public abstract class Personnage implements etreVivant{
     String nom;
     int niveauVie;
     private ArrayList<Arme> inventaireArmes; // (31) private
     private Arme Arme_en_Main;
-    
+    private static int nombreDePersonnages = 0;
    
     public Personnage (String nom, int niveauVie){
         this.nom = nom;
         this.niveauVie = niveauVie;
         this.inventaireArmes = new ArrayList<>();
         this.Arme_en_Main = null;
+        nombreDePersonnages++; 
     }
     
     public String getNom(){
@@ -35,6 +37,10 @@ public abstract class Personnage {
     
     public ArrayList<Arme> getInventaireArmes() {
         return inventaireArmes;
+    }
+    
+    public static int getNombreDePersonnages() {
+        return nombreDePersonnages;
     }
     
     public void ajouterArme(Arme a) {
@@ -72,6 +78,36 @@ public abstract class Personnage {
         }
         return base;
     }
+ 
+   @Override
+    protected void finalize() throws Throwable {
+        try {
+            // Décrémentation du compteur total
+            nombreDePersonnages--; 
+            System.out.println("DEBUG: " + this.nom + " (Personnage) a été détruit. Total restant: " + nombreDePersonnages);
+        } finally {
+            super.finalize();
+        }
+    }
+    
+    @Override
+    public void seFatiguer() {
+        this.niveauVie -= 10;
+        System.out.println(this.nom + " est fatigué et perd 10 points de vie. Vie restante : " + this.niveauVie);
+    }
+    
+    @Override
+    public boolean estVivant() {
+        return this.niveauVie > 0;
+    }
+    
+    @Override
+    public void estAttaque(int points) {
+        this.niveauVie -= points;
+        System.out.println(this.nom + " subit " + points + " points de dégâts. Vie restante : " + this.niveauVie);
+    }
+    
+    public abstract void attaquer(Personnage cible);
 }
 
 

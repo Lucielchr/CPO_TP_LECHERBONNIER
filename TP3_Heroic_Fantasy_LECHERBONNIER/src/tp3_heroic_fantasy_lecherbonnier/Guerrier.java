@@ -4,20 +4,30 @@
  */
 package tp3_heroic_fantasy_lecherbonnier;
 
+import Armes.Epee;
+import Armes.Arme;
+
 /**
  *
  * @author lucie
  */
 public class Guerrier extends Personnage{
     boolean aCheval;
+    private static int nombreDeGuerriers = 0;
     
     public Guerrier(String nom, int niveauVie, boolean aCheval) {
         super(nom, niveauVie);
         this.aCheval = aCheval;
+        nombreDeGuerriers++;
     }
     public void setACheval(boolean aCheval){
         this.aCheval = aCheval;
     }
+    
+    public static int getNombreDeGuerriers() {
+        return nombreDeGuerriers;
+    }
+    
     @Override
     public String toString() {
         return "Guerrier : " + nom + " | Vie : " + niveauVie + " | À cheval : " + aCheval;
@@ -33,5 +43,23 @@ public class Guerrier extends Personnage{
             }
         }
         return count;
+    }
+    
+    @Override
+    protected void finalize() throws Throwable {
+        try {
+            nombreDeGuerriers--; // Décrémentation du compteur spécifique
+        } finally {
+            super.finalize(); // Appel au finalize de Personnage
+        }
+    }
+    
+    @Override
+    public void attaquer(Personnage cible) {
+        int degats = 30; // Dégâts de base
+        
+        // (56) Appelle la méthode estAttaque(points) de la cible
+        System.out.print(this.getNom() + " (Guerrier) attaque " + cible.getNom() + ". ");
+        cible.estAttaque(degats);
     }
 }
