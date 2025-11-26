@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -8,6 +11,9 @@
  * @author lucie
  */
 public class FenetreQuiz extends javax.swing.JFrame {
+    private ArrayList<Question> listeQuestions; 
+    private int indexQuestionCourante = 0;
+    private int score = 0;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FenetreQuiz.class.getName());
 
@@ -16,6 +22,8 @@ public class FenetreQuiz extends javax.swing.JFrame {
      */
     public FenetreQuiz() {
         initComponents();
+        initialiserQuestions();
+        afficherQuestionCourante();
     }
 
     /**
@@ -32,16 +40,16 @@ public class FenetreQuiz extends javax.swing.JFrame {
         btnRep2 = new javax.swing.JButton();
         btnRep3 = new javax.swing.JButton();
         btnRep4 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        lblFeedback = new javax.swing.JLabel();
+        lblScore = new javax.swing.JLabel();
+        QuestionSuivante = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblQuestion.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblQuestion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblQuestion.setText("Question");
-        getContentPane().add(lblQuestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, -1, -1));
+        getContentPane().add(lblQuestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
 
         btnRep1.setText("Reponse 1");
         btnRep1.addActionListener(new java.awt.event.ActionListener() {
@@ -52,6 +60,11 @@ public class FenetreQuiz extends javax.swing.JFrame {
         getContentPane().add(btnRep1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
 
         btnRep2.setText("Reponse 2");
+        btnRep2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRep2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnRep2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
 
         btnRep3.setText("Reponse 3");
@@ -63,37 +76,58 @@ public class FenetreQuiz extends javax.swing.JFrame {
         getContentPane().add(btnRep3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, -1, -1));
 
         btnRep4.setText("Reponse 4");
-        getContentPane().add(btnRep4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, -1));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel1.setText("Feedback");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
-
-        jLabel2.setText("Score :");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, -1));
-
-        jButton1.setText("Question suivante");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRep4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRep4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, -1, -1));
+        getContentPane().add(btnRep4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, -1));
+
+        lblFeedback.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        lblFeedback.setText("Feedback");
+        getContentPane().add(lblFeedback, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
+
+        lblScore.setText("Score :");
+        getContentPane().add(lblScore, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, -1));
+
+        QuestionSuivante.setText("Question suivante");
+        QuestionSuivante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                QuestionSuivanteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(QuestionSuivante, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRep1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRep1ActionPerformed
-        // TODO add your handling code here:
+        verifierReponse(1);
     }//GEN-LAST:event_btnRep1ActionPerformed
 
     private void btnRep3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRep3ActionPerformed
-        // TODO add your handling code here:
+        verifierReponse(3);
     }//GEN-LAST:event_btnRep3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void QuestionSuivanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuestionSuivanteActionPerformed
+        indexQuestionCourante++;
+        if (indexQuestionCourante < listeQuestions.size()) {
+            afficherQuestionCourante();
+        } else {
+            lblQuestion.setText("FIN DU QUIZ !");
+            lblFeedback.setText("Quiz terminé. Score final : " + score + " / " + listeQuestions.size());
+            QuestionSuivante.setEnabled(false);
+            lblScore.setText("Score final : " + score + " / " + listeQuestions.size());
+        }
+    }//GEN-LAST:event_QuestionSuivanteActionPerformed
+
+    private void btnRep2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRep2ActionPerformed
+        verifierReponse(2);
+    }//GEN-LAST:event_btnRep2ActionPerformed
+
+    private void btnRep4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRep4ActionPerformed
+        verifierReponse(4);
+    }//GEN-LAST:event_btnRep4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,13 +155,79 @@ public class FenetreQuiz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton QuestionSuivante;
     private javax.swing.JButton btnRep1;
     private javax.swing.JButton btnRep2;
     private javax.swing.JButton btnRep3;
     private javax.swing.JButton btnRep4;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblFeedback;
     private javax.swing.JLabel lblQuestion;
+    private javax.swing.JLabel lblScore;
     // End of variables declaration//GEN-END:variables
+
+    private void initialiserQuestions() {
+        listeQuestions = new ArrayList<>();
+        
+        listeQuestions.add(new Question(
+            "Quel mot-clé Java est utilisé pour garantir qu'une variable ne peut être modifiée après son initialisation ?",
+            "static", "volatile", "final", "transient", 3));
+        listeQuestions.add(new Question(
+            "Que signifie l'acronyme 'CPU' ?",
+            "Central Power Unit", "Computer Processing Utility", "Central Processing Unit", "Control Program Unit", 3));
+        listeQuestions.add(new Question(
+            "Quel langage est principalement utilisé pour définir le style d'une page web ?",
+            "JavaScript", "HTML", "Python", "CSS", 4));
+        listeQuestions.add(new Question(
+            "Quelle clause SQL est utilisée pour filtrer les enregistrements d'un résultat de requête ?",
+            "SELECT", "FROM", "WHERE", "ORDER BY", 3));
+        listeQuestions.add(new Question(
+            "Quel type de mémoire est volatile (perd ses données quand le courant est coupé) ?",
+            "Disque Dur (HDD)", "SSD (Solid State Drive)", "RAM (Random Access Memory)", "ROM (Read-Only Memory)", 3));
+    }
+    
+    private void afficherQuestionCourante() {
+        if (indexQuestionCourante >= listeQuestions.size()) {
+            return; 
+        }
+        
+        Question question = listeQuestions.get(indexQuestionCourante);
+        
+        lblQuestion.setText(question.getIntitule()); 
+        
+        btnRep1.setText(question.getProposition1()); 
+        btnRep2.setText(question.getProposition2());
+        btnRep3.setText(question.getProposition3());
+        btnRep4.setText(question.getProposition4());
+        
+        btnRep1.setEnabled(true);
+        btnRep2.setEnabled(true);
+        btnRep3.setEnabled(true);
+        btnRep4.setEnabled(true);
+        
+        QuestionSuivante.setEnabled(false);
+        
+        lblFeedback.setText("Choisissez une réponse..."); 
+        lblScore.setText("Score : " + score + " / " + listeQuestions.size()); 
+    }
+    
+    private void verifierReponse(int reponseChoisie) {
+        Question questionCourante = listeQuestions.get(indexQuestionCourante);
+
+        if (reponseChoisie == questionCourante.getIndexBonneReponse()) {
+            lblFeedback.setText("Bonne réponse !!!"); 
+            score++; 
+        } else {
+            lblFeedback.setText("Mauvaise réponse. La bonne réponse était la proposition " + questionCourante.getIndexBonneReponse() + ".");
+        }
+        
+        btnRep1.setEnabled(false);
+        btnRep2.setEnabled(false);
+        btnRep3.setEnabled(false);
+        btnRep4.setEnabled(false);
+        
+        QuestionSuivante.setEnabled(true);
+        
+        lblScore.setText("Score : " + score + " / " + (indexQuestionCourante + 1)); 
+    }
+    
 }
