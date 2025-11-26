@@ -48,6 +48,7 @@ public class FenetreQuiz extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblQuestion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblQuestion.setForeground(new java.awt.Color(0, 153, 153));
         lblQuestion.setText("Question");
         getContentPane().add(lblQuestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
 
@@ -88,7 +89,7 @@ public class FenetreQuiz extends javax.swing.JFrame {
         getContentPane().add(lblFeedback, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
 
         lblScore.setText("Score :");
-        getContentPane().add(lblScore, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, -1));
+        getContentPane().add(lblScore, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, -1));
 
         QuestionSuivante.setText("Question suivante");
         QuestionSuivante.addActionListener(new java.awt.event.ActionListener() {
