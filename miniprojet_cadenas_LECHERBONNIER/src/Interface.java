@@ -253,7 +253,38 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_down_chiffre_4ActionPerformed
 
     private void bouton_testerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_testerActionPerformed
+        if (jeu.estPartieTerminee()) {
+            return; 
+        }
 
+        int[] essai = new int[4];
+        try {
+            essai[0] = Integer.parseInt(texte_chiffre_1.getText());
+            essai[1] = Integer.parseInt(texte_chiffre_2.getText());
+            essai[2] = Integer.parseInt(texte_chiffre_3.getText());
+            essai[3] = Integer.parseInt(texte_chiffre_4.getText());
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Erreur: Les chiffres ne sont pas au format attendu.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int[] resultats = jeu.testerCombinaison(essai);
+        texte_nb_chiffres_exacts.setText(String.valueOf(resultats[0]));
+        texte_nb_chiffres_haut.setText(String.valueOf(resultats[1]));
+        texte_nb_chiffres_bas.setText(String.valueOf(resultats[2]));
+        jLabel1.setText(jeu.getTentativesEffectuees() + " sur " + jeu.getMaxTentatives());
+
+        if (jeu.estPartieTerminee()) {
+            bouton_tester.setEnabled(false); 
+            String message;
+            if (jeu.estGagne()) {
+                message = "BRAVO !!! Vous avez trouvé le code secret : " + jeu.getCodeSecretString();
+            } else {
+                message = "PERDU !! Le code secret était : " + jeu.getCodeSecretString();
+            }
+            JOptionPane.showMessageDialog(this, message, "Fin de partie", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_bouton_testerActionPerformed
 
     private void bouton_recommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_recommencerActionPerformed
