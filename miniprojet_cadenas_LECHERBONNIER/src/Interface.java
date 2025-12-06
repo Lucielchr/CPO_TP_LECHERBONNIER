@@ -7,6 +7,11 @@
  *
  * @author lucie
  */
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import java.util.logging.Level;
+
 public class Interface extends javax.swing.JFrame {
     
     private CadenasJeu jeu;
@@ -19,6 +24,26 @@ public class Interface extends javax.swing.JFrame {
     public Interface() {
         initComponents();
         jeu = new CadenasJeu();
+        jLabel1.setText(jeu.getTentativesEffectuees() + " sur " + jeu.getMaxTentatives());
+        text_intro.setText("Trouvez le bon code en moins de " + jeu.getMaxTentatives() + " tentatives !");
+    }
+    
+    private void mettreAJourChiffre(javax.swing.JLabel label, boolean increment) {
+        if (jeu.estPartieTerminee()) {
+            return;
+        }
+        
+        try {
+            int chiffre = Integer.parseInt(label.getText());
+            if (increment) {
+                chiffre = (chiffre + 1) % 10;
+            } else {
+                chiffre = (chiffre - 1 + 10) % 10; 
+            }
+            label.setText(String.valueOf(chiffre));
+        } catch (NumberFormatException e) {
+            label.setText("0"); 
+        }
     }
 
     /**
@@ -285,4 +310,5 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton up_chiffre_3;
     private javax.swing.JButton up_chiffre_4;
     // End of variables declaration//GEN-END:variables
+
 }
