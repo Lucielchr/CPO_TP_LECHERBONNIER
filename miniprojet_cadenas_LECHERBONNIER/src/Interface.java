@@ -9,6 +9,8 @@
  */
 public class Interface extends javax.swing.JFrame {
     
+    private CadenasJeu jeu;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Interface.class.getName());
 
     /**
@@ -16,6 +18,7 @@ public class Interface extends javax.swing.JFrame {
      */
     public Interface() {
         initComponents();
+        jeu = new CadenasJeu();
     }
 
     /**
