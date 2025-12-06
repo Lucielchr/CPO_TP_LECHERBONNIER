@@ -221,43 +221,43 @@ public class Interface extends javax.swing.JFrame {
                     }// </editor-fold>//GEN-END:initComponents
 
     private void up_chiffre_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_1ActionPerformed
-        // TODO add your handling code here:
+        mettreAJourChiffre(texte_chiffre_1, true);
     }//GEN-LAST:event_up_chiffre_1ActionPerformed
 
     private void up_chiffre_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_2ActionPerformed
-        // TODO add your handling code here:
+        mettreAJourChiffre(texte_chiffre_2, true);
     }//GEN-LAST:event_up_chiffre_2ActionPerformed
 
     private void up_chiffre_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_3ActionPerformed
-        // TODO add your handling code here:
+        mettreAJourChiffre(texte_chiffre_3, true);
     }//GEN-LAST:event_up_chiffre_3ActionPerformed
 
     private void up_chiffre_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_4ActionPerformed
-        // TODO add your handling code here:
+        mettreAJourChiffre(texte_chiffre_4, true);
     }//GEN-LAST:event_up_chiffre_4ActionPerformed
 
     private void down_chiffre_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_down_chiffre_1ActionPerformed
-        // TODO add your handling code here:
+        mettreAJourChiffre(texte_chiffre_1, false);
     }//GEN-LAST:event_down_chiffre_1ActionPerformed
 
     private void down_chiffre_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_down_chiffre_3ActionPerformed
-        // TODO add your handling code here:
+        mettreAJourChiffre(texte_chiffre_3, false);
     }//GEN-LAST:event_down_chiffre_3ActionPerformed
 
     private void down_chiffre_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_down_chiffre_2ActionPerformed
-        // TODO add your handling code here:
+        mettreAJourChiffre(texte_chiffre_2, false);
     }//GEN-LAST:event_down_chiffre_2ActionPerformed
 
     private void down_chiffre_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_down_chiffre_4ActionPerformed
-        // TODO add your handling code here:
+        mettreAJourChiffre(texte_chiffre_4, false);
     }//GEN-LAST:event_down_chiffre_4ActionPerformed
 
     private void bouton_testerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_testerActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_bouton_testerActionPerformed
 
     private void bouton_recommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_recommencerActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_bouton_recommencerActionPerformed
 
     /**
