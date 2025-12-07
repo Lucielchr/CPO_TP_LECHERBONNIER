@@ -24,7 +24,7 @@ public class Interface extends javax.swing.JFrame {
     public Interface() {
         initComponents();
         jeu = new CadenasJeu();
-        jLabel1.setText(jeu.getTentativesEffectuees() + " sur " + jeu.getMaxTentatives());
+        texte_score.setText(jeu.getTentativesEffectuees() + " sur " + jeu.getMaxTentatives());
         text_intro.setText("Trouvez le bon code en moins de " + jeu.getMaxTentatives() + " tentatives !");
     }
     
@@ -76,7 +76,7 @@ public class Interface extends javax.swing.JFrame {
         texte_lbl_nb_chiffres_bas = new javax.swing.JLabel();
         texte_nb_chiffres_bas = new javax.swing.JLabel();
         texte_tentatives = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        texte_score = new javax.swing.JLabel();
         bouton_recommencer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -203,11 +203,11 @@ public class Interface extends javax.swing.JFrame {
                         texte_tentatives.setText("Tentatives");
                         getContentPane().add(texte_tentatives, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, -1, -1));
 
-                        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-                        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                        jLabel1.setText("0 sur 5");
-                        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 255), 2));
-                        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, 90, 50));
+                        texte_score.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+                        texte_score.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                        texte_score.setText("0 sur 5");
+                        texte_score.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 255), 2));
+                        getContentPane().add(texte_score, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, 90, 50));
 
                         bouton_recommencer.setText("Recommencer");
                         bouton_recommencer.addActionListener(new java.awt.event.ActionListener() {
@@ -273,7 +273,7 @@ public class Interface extends javax.swing.JFrame {
         texte_nb_chiffres_exacts.setText(String.valueOf(resultats[0]));
         texte_nb_chiffres_haut.setText(String.valueOf(resultats[1]));
         texte_nb_chiffres_bas.setText(String.valueOf(resultats[2]));
-        jLabel1.setText(jeu.getTentativesEffectuees() + " sur " + jeu.getMaxTentatives());
+        texte_score.setText(jeu.getTentativesEffectuees() + " sur " + jeu.getMaxTentatives());
 
         if (jeu.estPartieTerminee()) {
             bouton_tester.setEnabled(false); 
@@ -299,7 +299,7 @@ public class Interface extends javax.swing.JFrame {
         texte_nb_chiffres_haut.setText("0");
         texte_nb_chiffres_bas.setText("0");
 
-        jLabel1.setText(jeu.getTentativesEffectuees() + " sur " + jeu.getMaxTentatives()); 
+        texte_score.setText(jeu.getTentativesEffectuees() + " sur " + jeu.getMaxTentatives()); 
         
         bouton_tester.setEnabled(true);
     }//GEN-LAST:event_bouton_recommencerActionPerformed
@@ -324,7 +324,16 @@ public class Interface extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        }catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new Interface().setVisible(true));
     }
@@ -336,7 +345,6 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton down_chiffre_2;
     private javax.swing.JButton down_chiffre_3;
     private javax.swing.JButton down_chiffre_4;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel text_intro;
     private javax.swing.JLabel texte_chiffre_1;
     private javax.swing.JLabel texte_chiffre_2;
@@ -348,6 +356,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel texte_nb_chiffres_bas;
     private javax.swing.JLabel texte_nb_chiffres_exacts;
     private javax.swing.JLabel texte_nb_chiffres_haut;
+    private javax.swing.JLabel texte_score;
     private javax.swing.JLabel texte_tentatives;
     private javax.swing.JButton up_chiffre_1;
     private javax.swing.JButton up_chiffre_2;
