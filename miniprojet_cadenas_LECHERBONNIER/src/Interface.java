@@ -288,7 +288,20 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_bouton_testerActionPerformed
 
     private void bouton_recommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_recommencerActionPerformed
+        jeu.démarrerJeu();
 
+        texte_chiffre_1.setText("0");
+        texte_chiffre_2.setText("0");
+        texte_chiffre_3.setText("0");
+        texte_chiffre_4.setText("0");
+
+        texte_nb_chiffres_exacts.setText("0");
+        texte_nb_chiffres_haut.setText("0");
+        texte_nb_chiffres_bas.setText("0");
+
+        jLabel1.setText(jeu.getTentativesEffectuees() + " sur " + jeu.getMaxTentatives()); 
+        
+        bouton_tester.setEnabled(true);
     }//GEN-LAST:event_bouton_recommencerActionPerformed
 
     /**
