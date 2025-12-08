@@ -207,7 +207,7 @@ public class Interface extends javax.swing.JFrame {
                         texte_score.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         texte_score.setText("0 sur 5");
                         texte_score.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 255), 2));
-                        getContentPane().add(texte_score, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, 90, 50));
+                        getContentPane().add(texte_score, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, 120, 50));
 
                         bouton_recommencer.setText("Recommencer");
                         bouton_recommencer.addActionListener(new java.awt.event.ActionListener() {
