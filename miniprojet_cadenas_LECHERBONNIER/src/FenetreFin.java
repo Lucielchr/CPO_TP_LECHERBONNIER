@@ -11,11 +11,19 @@ public class FenetreFin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FenetreFin.class.getName());
 
+    
     /**
      * Creates new form FenetreFin
      */
-    public FenetreFin() {
+    public FenetreFin(boolean gagne, String codeSecret, int tentatives) {
         initComponents();
+        if (gagne) {
+            lbl_message_fin.setText("BRAVO ! Vous avez trouvé le code en " + tentatives + " tentatives !");
+        } else {
+            lbl_message_fin.setText("PERDU ! Vous avez épuisé vos tentatives.");
+        }
+        
+        lbl_code_secret.setText("Le code secret était : " + codeSecret);
     }
 
     /**
@@ -27,47 +35,44 @@ public class FenetreFin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        bouton_recommencer = new javax.swing.JButton();
+        lbl_message_fin = new javax.swing.JLabel();
+        lbl_code_secret = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        bouton_recommencer.setText("Recommencer");
+        bouton_recommencer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bouton_recommencerActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bouton_recommencer, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 128, -1, -1));
+
+        lbl_message_fin.setText("msg fin");
+        getContentPane().add(lbl_message_fin, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 48, -1, -1));
+
+        lbl_code_secret.setText("code secret");
+        getContentPane().add(lbl_code_secret, new org.netbeans.lib.awtextra.AbsoluteConstraints(223, 184, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bouton_recommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_recommencerActionPerformed
+    FenetreAccueil accueil = new FenetreAccueil(); 
+        accueil.setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_bouton_recommencerActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FenetreFin().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bouton_recommencer;
+    private javax.swing.JLabel lbl_code_secret;
+    private javax.swing.JLabel lbl_message_fin;
     // End of variables declaration//GEN-END:variables
 }
