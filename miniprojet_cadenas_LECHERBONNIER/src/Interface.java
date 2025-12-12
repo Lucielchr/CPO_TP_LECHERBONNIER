@@ -276,7 +276,14 @@ public class Interface extends javax.swing.JFrame {
         texte_score.setText(jeu.getTentativesEffectuees() + " sur " + jeu.getMaxTentatives());
 
         if (jeu.estPartieTerminee()) {
-            bouton_tester.setEnabled(false); 
+            bouton_tester.setEnabled(false);
+            boolean gagne = jeu.estGagne();
+            String codeSecret = jeu.getCodeSecretString();
+            int tentatives = jeu.getTentativesEffectuees();
+            FenetreFin fin = new FenetreFin(gagne, codeSecret, tentatives);
+            fin.setVisible(true);
+
+            this.dispose();
             String message;
             if (jeu.estGagne()) {
                 message = "BRAVO !!! Vous avez trouvé le code secret : " + jeu.getCodeSecretString();
