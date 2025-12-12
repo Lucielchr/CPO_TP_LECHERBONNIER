@@ -7,12 +7,13 @@
  *
  * @author lucie
  */
-
+import java.util.ArrayList;
+import java.util.List; 
 import java.util.Random;
 
 public class CadenasJeu {
     private static final int LONGUEUR_CODE = 4;
-    private static final int MAX_TENTATIVES = 5; 
+    private static final int MAX_TENTATIVES = 10; 
     private static final int MIN_CHIFFRE = 0; 
     private static final int MAX_CHIFFRE = 9;
     
