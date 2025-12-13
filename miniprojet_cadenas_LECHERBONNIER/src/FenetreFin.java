@@ -35,12 +35,29 @@ public class FenetreFin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bouton_recommencer = new javax.swing.JButton();
         lbl_message_fin = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         lbl_code_secret = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        bouton_recommencer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_message_fin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbl_message_fin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_message_fin.setText("message fin");
+        getContentPane().add(lbl_message_fin, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 30, 420, -1));
+
+        jPanel1.setLayout(new java.awt.GridLayout(3, 1));
+
+        lbl_code_secret.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_code_secret.setText("code secret");
+        lbl_code_secret.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 255), 2));
+        jPanel1.add(lbl_code_secret);
+
+        jLabel1.setText("  ");
+        jPanel1.add(jLabel1);
 
         bouton_recommencer.setText("Recommencer");
         bouton_recommencer.addActionListener(new java.awt.event.ActionListener() {
@@ -48,15 +65,9 @@ public class FenetreFin extends javax.swing.JFrame {
                 bouton_recommencerActionPerformed(evt);
             }
         });
-        getContentPane().add(bouton_recommencer, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, -1, -1));
+        jPanel1.add(bouton_recommencer);
 
-        lbl_message_fin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lbl_message_fin.setText("message fin");
-        getContentPane().add(lbl_message_fin, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
-
-        lbl_code_secret.setText("code secret");
-        lbl_code_secret.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 255), 2));
-        getContentPane().add(lbl_code_secret, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -70,6 +81,8 @@ public class FenetreFin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bouton_recommencer;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_code_secret;
     private javax.swing.JLabel lbl_message_fin;
     // End of variables declaration//GEN-END:variables
