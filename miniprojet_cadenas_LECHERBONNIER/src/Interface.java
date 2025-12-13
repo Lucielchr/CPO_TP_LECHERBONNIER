@@ -11,21 +11,34 @@
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.util.logging.Level;
+import java.awt.Color;
 
 public class Interface extends javax.swing.JFrame {
     
     private CadenasJeu jeu;
+    private javax.swing.JLabel[] chiffresLabels;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Interface.class.getName());
 
     /**
      * Creates new form Victoire
      */
-    public Interface() {
+    public Interface(CadenasJeu.NiveauDifficulte niveau) {
         initComponents();
-        jeu = new CadenasJeu();
+        this.jeu = new CadenasJeu(niveau);
+        
+        chiffresLabels = new javax.swing.JLabel[] {
+            texte_chiffre_1,
+            texte_chiffre_2,
+            texte_chiffre_3,
+            texte_chiffre_4
+        };
+        
         texte_score.setText(jeu.getTentativesEffectuees() + " sur " + jeu.getMaxTentatives());
         text_intro.setText("Trouvez le bon code en moins de " + jeu.getMaxTentatives() + " tentatives !");
+        texte_nb_chiffres_exacts.setText("0");
+        texte_nb_chiffres_haut.setText("0");
+        texte_nb_chiffres_bas.setText("0");
     }
     
     private void mettreAJourChiffre(javax.swing.JLabel label, boolean increment) {
@@ -46,6 +59,29 @@ public class Interface extends javax.swing.JFrame {
         }
     }
 
+    private void mettreAJourCouleurs(int[] essai, int[] codeSecret) {
+        
+        final Color DEFAULT_COLOR = new Color(255, 153, 255); 
+        final Color CORRECT_COLOR = Color.GREEN;
+        final int DEFAULT_BORDER_THICKNESS = 2;
+        final int HIGHLIGHT_BORDER_THICKNESS = 3;
+
+        if (jeu.getNiveauCourant() != CadenasJeu.NiveauDifficulte.FACILE) {
+            for (javax.swing.JLabel label : chiffresLabels) {
+                label.setBorder(javax.swing.BorderFactory.createLineBorder(DEFAULT_COLOR, DEFAULT_BORDER_THICKNESS));
+            }
+            return;
+        }
+
+        for (int i = 0; i < chiffresLabels.length; i++) {
+            if (essai[i] == codeSecret[i]) {
+                chiffresLabels[i].setBorder(javax.swing.BorderFactory.createLineBorder(CORRECT_COLOR, HIGHLIGHT_BORDER_THICKNESS));
+            } else {
+                chiffresLabels[i].setBorder(javax.swing.BorderFactory.createLineBorder(DEFAULT_COLOR, DEFAULT_BORDER_THICKNESS));
+            }
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -253,62 +289,51 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_down_chiffre_4ActionPerformed
 
     private void bouton_testerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_testerActionPerformed
-        if (jeu.estPartieTerminee()) {
+    if (jeu.estPartieTerminee()) {
             return; 
         }
 
         int[] essai = new int[4];
+        
         try {
             essai[0] = Integer.parseInt(texte_chiffre_1.getText());
             essai[1] = Integer.parseInt(texte_chiffre_2.getText());
             essai[2] = Integer.parseInt(texte_chiffre_3.getText());
             essai[3] = Integer.parseInt(texte_chiffre_4.getText());
+        
+            for (int chiffre : essai) {
+                if (chiffre < 0 || chiffre > 9) {
+                    throw new NumberFormatException(); 
+                }
+            }
 
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Erreur: Les chiffres ne sont pas au format attendu.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erreur: Veuillez entrer 4 chiffres valides (de 0 à 9).", "Erreur de Saisie", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         int[] resultats = jeu.testerCombinaison(essai);
+        mettreAJourCouleurs(essai, jeu.getCodeSecret());
+        
         texte_nb_chiffres_exacts.setText(String.valueOf(resultats[0]));
         texte_nb_chiffres_haut.setText(String.valueOf(resultats[1]));
         texte_nb_chiffres_bas.setText(String.valueOf(resultats[2]));
+        
         texte_score.setText(jeu.getTentativesEffectuees() + " sur " + jeu.getMaxTentatives());
 
         if (jeu.estPartieTerminee()) {
             bouton_tester.setEnabled(false);
-            boolean gagne = jeu.estGagne();
-            String codeSecret = jeu.getCodeSecretString();
-            int tentatives = jeu.getTentativesEffectuees();
-            FenetreFin fin = new FenetreFin(gagne, codeSecret, tentatives);
+            
+            FenetreFin fin = new FenetreFin(jeu.estGagne(), jeu.getCodeSecretString(), jeu.getTentativesEffectuees());
             fin.setVisible(true);
 
-            this.dispose();
-            String message;
-            if (jeu.estGagne()) {
-                message = "BRAVO !!! Vous avez trouvé le code secret : " + jeu.getCodeSecretString();
-            } else {
-                message = "PERDU !! Le code secret était : " + jeu.getCodeSecretString();
-            }
-            JOptionPane.showMessageDialog(this, message, "Fin de partie", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose(); 
         }
     }//GEN-LAST:event_bouton_testerActionPerformed
 
     private void bouton_recommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_recommencerActionPerformed
-        jeu.démarrerJeu();
-
-        texte_chiffre_1.setText("0");
-        texte_chiffre_2.setText("0");
-        texte_chiffre_3.setText("0");
-        texte_chiffre_4.setText("0");
-
-        texte_nb_chiffres_exacts.setText("0");
-        texte_nb_chiffres_haut.setText("0");
-        texte_nb_chiffres_bas.setText("0");
-
-        texte_score.setText(jeu.getTentativesEffectuees() + " sur " + jeu.getMaxTentatives()); 
-        
-        bouton_tester.setEnabled(true);
+    new FenetreAccueil().setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_bouton_recommencerActionPerformed
 
     /**
@@ -338,11 +363,20 @@ public class Interface extends javax.swing.JFrame {
                     break;
                 }
             }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
         }catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(Level.SEVERE, null, ex);
         }
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Interface().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FenetreAccueil().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
