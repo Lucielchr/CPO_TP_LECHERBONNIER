@@ -8,29 +8,23 @@ package Armes;
  *
  * @author lucie
  */
-public abstract class Arme {
-    String nom ;
-    int niveauAttaque; 
-    
-    public Arme (String nom, int niveauAttaque){
-        this.nom = nom ;
-        if (niveauAttaque <= 100) {
-            this.niveauAttaque = niveauAttaque;
-        } else {
-            this.niveauAttaque = 100;
-        }
+public class Arme {
+
+    protected String nom;
+    protected int niveauAttaque;
+
+    public Arme(String nom, int niveauAttaque) {
+        this.nom = nom;
+        if (niveauAttaque > 100) niveauAttaque = 100;
+        if (niveauAttaque < 0) niveauAttaque = 0;
+        this.niveauAttaque = niveauAttaque;
     }
-    
-    public int getNiveauAttaque(){
-        return niveauAttaque;
-    }
-    
-    public String getnom(){
-        return nom;
-    }
-    
-    @Override 
+
+    public String getNom() { return nom; }
+    public int getNiveauAttaque() { return niveauAttaque; }
+
+    @Override
     public String toString() {
-        return "Arme :" + nom + "/ Niveau d'attaque :" + niveauAttaque ;
+        return nom + " (attaque = " + niveauAttaque + ")";
     }
 }
