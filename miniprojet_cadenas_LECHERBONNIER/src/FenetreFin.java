@@ -76,13 +76,13 @@ public class FenetreFin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bouton_recommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_recommencerActionPerformed
-    try {
-        FenetreAccueil accueil = new FenetreAccueil();
-        accueil.setVisible(true);
-        this.dispose();
-    } catch (Exception ex) {
-        logger.log(Level.SEVERE, "Impossible d'ouvrir FenetreAccueil", ex);
-    }
+        try {
+            FenetreAccueil accueil = new FenetreAccueil();
+            accueil.setVisible(true);
+            this.dispose();
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, "Impossible d'ouvrir FenetreAccueil", ex);
+        }
     }//GEN-LAST:event_bouton_recommencerActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
