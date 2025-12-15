@@ -11,23 +11,44 @@
 import java.util.Random;
 
 public class CadenasJeu {
+    
+    public enum NiveauDifficulte {
+        FACILE(15),      
+        NORMAL(10),      
+        DIFFICILE(5);    
+
+        private final int maxTentatives;
+
+        NiveauDifficulte(int maxTentatives) {
+            this.maxTentatives = maxTentatives;
+        }
+
+        public int getMaxTentatives() {
+            return maxTentatives;
+        }
+    }
+    
     private static final int LONGUEUR_CODE = 4;
-    private static final int MAX_TENTATIVES = 10; 
     private static final int MIN_CHIFFRE = 0; 
     private static final int MAX_CHIFFRE = 9;
     
     private int[] codeSecret;
     private int tentativesRestantes;
     private boolean estGagne;
+    private int maxTentativesJeu;
+    private NiveauDifficulte niveauCourant;
     
-    public CadenasJeu() {
-        démarrerJeu();
+    
+    public CadenasJeu(NiveauDifficulte niveau) {
+    this.niveauCourant = niveau;
+    this.maxTentativesJeu = niveau.getMaxTentatives();
+    démarrerJeu();
     }
     
     public final void démarrerJeu() {
-        codeSecret = générerCodeSecret();
-        tentativesRestantes = MAX_TENTATIVES;
-        estGagne = false;
+    codeSecret = générerCodeSecret();
+    tentativesRestantes = maxTentativesJeu; 
+    estGagne = false;
     }
     
     private int[] générerCodeSecret() {
@@ -40,7 +61,6 @@ public class CadenasJeu {
     }
     
     public int[] testerCombinaison(int[] essai) throws IllegalArgumentException {
-        // Validation basique
         if (essai == null || essai.length != LONGUEUR_CODE) {
             throw new IllegalArgumentException("L'essai doit être un tableau de " + LONGUEUR_CODE + " chiffres.");
         }
@@ -58,11 +78,13 @@ public class CadenasJeu {
                 exacts++;
             } else if (essai[i] > codeSecret[i]) {
                 tropHauts++;
-            } else { // essai[i] < codeSecret[i]
+            } else { 
                 tropBas++;
             }
         }
+        
         tentativesRestantes--;
+        
         if (exacts == LONGUEUR_CODE) {
             estGagne = true;
         }
@@ -75,11 +97,11 @@ public class CadenasJeu {
     }
     
     public int getTentativesEffectuees() {
-        return MAX_TENTATIVES - tentativesRestantes;
+        return maxTentativesJeu - tentativesRestantes;
     }
     
     public int getMaxTentatives() {
-        return MAX_TENTATIVES;
+        return maxTentativesJeu;
     }
 
     public boolean estGagne() {
@@ -90,6 +112,14 @@ public class CadenasJeu {
          return arrayToString(codeSecret);
     }
     
+    public NiveauDifficulte getNiveauCourant() {
+    return niveauCourant;
+    }
+
+    public int[] getCodeSecret() {
+    return java.util.Arrays.copyOf(codeSecret, codeSecret.length);
+    }
+
     private String arrayToString(int[] arr) {
         if (arr == null) return "";
         StringBuilder sb = new StringBuilder();

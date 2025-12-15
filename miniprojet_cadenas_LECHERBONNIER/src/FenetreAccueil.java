@@ -7,6 +7,7 @@
  *
  * @author lucie
  */
+
 public class FenetreAccueil extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FenetreAccueil.class.getName());
@@ -18,6 +19,11 @@ public class FenetreAccueil extends javax.swing.JFrame {
         initComponents();
     }
 
+    private void lancerJeu(CadenasJeu.NiveauDifficulte niveau) {
+        Interface jeuInterface = new Interface(niveau);
+        jeuInterface.setVisible(true);
+        this.dispose(); 
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,21 +33,58 @@ public class FenetreAccueil extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        btn_facile = new javax.swing.JButton();
+        btn_normal = new javax.swing.JButton();
+        btn_difficile = new javax.swing.JButton();
+        lbl_niveau = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_facile.setText("Facile");
+        btn_facile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_facileActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_facile, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, -1, -1));
+
+        btn_normal.setText("Nomal");
+        btn_normal.setToolTipText("");
+        btn_normal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_normalActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_normal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, -1, -1));
+
+        btn_difficile.setText("Difficile");
+        btn_difficile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_difficileActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_difficile, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, -1, -1));
+
+        lbl_niveau.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbl_niveau.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_niveau.setText("Choisissez votre niveau de jeu ");
+        getContentPane().add(lbl_niveau, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 400, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_facileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_facileActionPerformed
+        lancerJeu(CadenasJeu.NiveauDifficulte.FACILE);
+    }//GEN-LAST:event_btn_facileActionPerformed
+
+    private void btn_normalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_normalActionPerformed
+        lancerJeu(CadenasJeu.NiveauDifficulte.NORMAL);
+    }//GEN-LAST:event_btn_normalActionPerformed
+
+    private void btn_difficileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_difficileActionPerformed
+        lancerJeu(CadenasJeu.NiveauDifficulte.DIFFICILE);
+    }//GEN-LAST:event_btn_difficileActionPerformed
 
     /**
      * @param args the command line arguments
@@ -69,5 +112,9 @@ public class FenetreAccueil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_difficile;
+    private javax.swing.JButton btn_facile;
+    private javax.swing.JButton btn_normal;
+    private javax.swing.JLabel lbl_niveau;
     // End of variables declaration//GEN-END:variables
 }
