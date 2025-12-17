@@ -61,11 +61,15 @@ public class JeuChevaucheeFantastique {
         posCavalier = new Case (0,0);
     }
     
-    
-    public void passerAuNiveauSuivant() {
-        initialiserNiveau(this.niveauActuel + 1);
+    public boolean deplacerCavalier(int r, int c) {
+          
     }
-
+    
+    private void genererAleatoire() {
+        Random r = new Random();
+        for(int i=0; i<8; i++) damier[r.nextInt(taille)][r.nextInt(taille)] = 1;
+    }
+    
     public int getTaille() {
         return taille;
     }
@@ -74,15 +78,11 @@ public class JeuChevaucheeFantastique {
         return damier[r][c];
     }
 
-    public Case getPosCavalier() {
-        return posCavalier;
-    }
-
     public int getNiveauActuel() {
         return niveauActuel;
     }
     
-    public int getTotalNiveaux() {
-        return NIVEAUX.length;
+    public Case getPosCavalier() {
+        return posCavalier; 
     }
 }
