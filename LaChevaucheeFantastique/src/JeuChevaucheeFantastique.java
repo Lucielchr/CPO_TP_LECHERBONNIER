@@ -27,14 +27,14 @@ public class JeuChevaucheeFantastique {
         {
             {1, 0, 0, 0, 1},
             {0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0},
+            {0, 1, 0, 1, 0},
             {0, 0, 0, 0, 0},
             {1, 0, 0, 0, 1}
         }
     };
     
         public JeuChevaucheeFantastique() {
-        initialiserNiveau(0);
+            initialiserNiveau(0);
     }
     
     public void initialiserNiveau(int index) {
@@ -62,7 +62,19 @@ public class JeuChevaucheeFantastique {
     }
     
     public boolean deplacerCavalier(int r, int c) {
-          
+        int dR = Math.abs(r - posCavalier.getLigne());
+        int dC = Math.abs(c - posCavalier.getColonne());
+        if ((dR == 2 && dC == 1) || (dR == 1 && dC == 2)) {
+            posCavalier = new Case(r, c);
+            damier[r][c] = 0;
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean estTermine() {
+        for(int[] row : damier) for(int val : row) if(val == 1) return false;
+        return true;
     }
     
     private void genererAleatoire() {
