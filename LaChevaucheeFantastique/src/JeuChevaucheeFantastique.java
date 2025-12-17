@@ -16,11 +16,6 @@ public class JeuChevaucheeFantastique {
     private Case posCavalier;
     private int niveauActuel = 0;
     
-    private static final int[][] MOUVEMENTS = {
-        {-2, -1}, {-2, 1}, {-1, -2}, {-1, 2},
-        { 2, -1}, { 2, 1}, { 1, -2}, { 1, 2}
-    };
-    
     private static final int[][][] NIVEAUX = {
         {
             {0, 0, 1, 0, 0},
@@ -53,6 +48,18 @@ public class JeuChevaucheeFantastique {
         placerCavalier();
     }
     
+    private void placerCavalier(){
+        for(int r=0; r<taille; r++){
+            for(int c=0; c<taille; c++){
+                if (damier[r][c]==1){
+                    posCavalier = new Case(r, c);
+                    damier[r][c]=0;
+                    return;
+                }
+            }
+        }
+        posCavalier = new Case (0,0);
+    }
     
     
     public void passerAuNiveauSuivant() {
@@ -76,6 +83,6 @@ public class JeuChevaucheeFantastique {
     }
     
     public int getTotalNiveaux() {
-        return NIVEAUX_PREDEFINIS.length;
+        return NIVEAUX.length;
     }
 }
