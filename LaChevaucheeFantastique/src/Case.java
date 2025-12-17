@@ -8,5 +8,11 @@
  * @author lucie
  */
 public class Case {
+    private final int ligne;
+    private final int colonne;
     
+    public Case(int ligne, int colonne) {
+        this.ligne = ligne;
+        this.colonne = colonne;
+    }   
 }
