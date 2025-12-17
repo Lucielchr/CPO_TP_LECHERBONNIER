@@ -15,4 +15,20 @@ public class Case {
         this.ligne = ligne;
         this.colonne = colonne;
     }   
+    
+    public int getLigne() {
+        return ligne;
+    }
+
+    public int getColonne() {
+        return colonne;
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Case aCase = (Case) o;
+        return ligne == aCase.ligne && colonne == aCase.colonne;
+    }
 }

@@ -9,9 +9,6 @@
  */
 
 import java.util.Random;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
 
 public class JeuChevaucheeFantastique {
     private int taille = 5; 
@@ -19,12 +16,12 @@ public class JeuChevaucheeFantastique {
     private Case posCavalier;
     private int niveauActuel = 0;
     
-    private static final int[][] MOUVEMENTS_CAVALIER = {
+    private static final int[][] MOUVEMENTS = {
         {-2, -1}, {-2, 1}, {-1, -2}, {-1, 2},
         { 2, -1}, { 2, 1}, { 1, -2}, { 1, 2}
     };
     
-    private static final int[][][] NIVEAUX_PREDEFINIS = {
+    private static final int[][][] NIVEAUX = {
         {
             {0, 0, 1, 0, 0},
             {0, 0, 1, 0, 0},
@@ -40,6 +37,22 @@ public class JeuChevaucheeFantastique {
             {1, 0, 0, 0, 1}
         }
     };
+    
+        public JeuChevaucheeFantastique() {
+        initialiserNiveau(0);
+    }
+    
+    public void initialiserNiveau(int index) {
+        this.niveauActuel = index;
+        this.damier = new int[taille][taille];
+        if (index < NIVEAUX.length) {
+            for(int i=0; i<taille; i++) System.arraycopy(NIVEAUX[index][i], 0, damier[i], 0, taille);
+        } else {
+            genererAleatoire();
+        }
+        placerCavalier();
+    }
+    
     
     
     public void passerAuNiveauSuivant() {
