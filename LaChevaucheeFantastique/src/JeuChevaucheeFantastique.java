@@ -15,6 +15,7 @@ public class JeuChevaucheeFantastique {
     private int[][] damier; 
     private Case posCavalier;
     private int niveauActuel = 1;
+    private int bonusDifficulte = 0;
     
     public JeuChevaucheeFantastique() {
         this.damier = new int[taille][taille];
@@ -23,7 +24,6 @@ public class JeuChevaucheeFantastique {
     
     public void initialiserNiveau(int index) {
         this.niveauActuel = index;
-        // On vide le damier pour la nouvelle génération
         for (int i = 0; i < taille; i++) {
             for (int j = 0; j < taille; j++) damier[i][j] = 0;
         }
@@ -38,7 +38,7 @@ public class JeuChevaucheeFantastique {
         damier[r][c] = 1;
 
         int[][] sauts = {{2,1},{2,-1},{-2,1},{-2,-1},{1,2},{1,-2},{-1,2},{-1,-2}};
-        int nombreDeCasesCibles = Math.min(5 + niveauActuel, 20);
+        int nombreDeCasesCibles = Math.min(5 + niveauActuel + bonusDifficulte, 24);
         
         int casesAllumees = 1;
         int tentatives = 0;
@@ -59,7 +59,6 @@ public class JeuChevaucheeFantastique {
             tentatives++;
         }
     }
-    
     
     private void placerCavalier() {
         for(int r = 0; r < taille; r++) {
@@ -123,4 +122,7 @@ public class JeuChevaucheeFantastique {
     public Case getPosCavalier() {
         return posCavalier; 
     }
+    
+    public void activerModeDifficile() { 
+        this.bonusDifficulte = 8; }
 }
