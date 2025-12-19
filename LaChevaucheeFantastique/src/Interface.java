@@ -30,6 +30,15 @@ public class Interface extends javax.swing.JFrame {
         this.getContentPane().setLayout(new GridLayout(t, t));
 
         
+    
+    private void rafraichir() {
+        Case cp = jeu.getPosCavalier();
+        for (int i = 0; i < jeu.getTaille(); i++) {
+            for (int j = 0; j < jeu.getTaille(); j++) {
+                boolean estCav = (cp.getLigne() == i && cp.getColonne() == j);
+                grille[i][j].maj(jeu.getEtatCase(i, j), estCav, (i + j) % 2 == 0);
+            }
+        }
     }
 
     /**
