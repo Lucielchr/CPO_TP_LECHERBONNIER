@@ -67,7 +67,7 @@ public class JeuChevaucheeFantastique {
     
     if (((dR == 2 && dC == 1) || (dR == 1 && dC == 2)) && damier[r][c] == 1) {
         posCavalier = new Case(r, c);
-        damier[r][c] = 0; // On éteint la case
+        damier[r][c] = 0; 
         return true;
     }
     return false;
