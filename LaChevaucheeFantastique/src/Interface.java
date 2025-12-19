@@ -29,7 +29,28 @@ public class Interface extends javax.swing.JFrame {
         
         this.getContentPane().setLayout(new GridLayout(t, t));
 
+        for (int i = 0; i < t; i++) {
+            for (int j = 0; j < t; j++) {
+                final int r = i;
+                final int c = j;
+                grille[i][j] = new CelluleGraphique();
+                
+                grille[i][j].addActionListener(e -> {
+                    if (jeu.deplacerCavalier(r, c)) {
+                        if (jeu.estTermine()) {
+                            JOptionPane.showMessageDialog(this, "Niveau Gagné !");
+                            jeu.initialiserNiveau(jeu.getNiveauActuel() + 1);
+                        }
+                        rafraichir();
+                    }
+                });
+                this.getContentPane().add(grille[i][j]);
+            }
+        }
         
+        rafraichir();
+        this.setSize(600, 600);
+    }
     
     private void rafraichir() {
         Case cp = jeu.getPosCavalier();

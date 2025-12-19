@@ -62,15 +62,16 @@ public class JeuChevaucheeFantastique {
     }
     
     public boolean deplacerCavalier(int r, int c) {
-        int dR = Math.abs(r - posCavalier.getLigne());
-        int dC = Math.abs(c - posCavalier.getColonne());
-        if ((dR == 2 && dC == 1) || (dR == 1 && dC == 2)) {
-            posCavalier = new Case(r, c);
-            damier[r][c] = 0;
-            return true;
-        }
-        return false;
+    int dR = Math.abs(r - posCavalier.getLigne());
+    int dC = Math.abs(c - posCavalier.getColonne());
+    
+    if (((dR == 2 && dC == 1) || (dR == 1 && dC == 2)) && damier[r][c] == 1) {
+        posCavalier = new Case(r, c);
+        damier[r][c] = 0; // On éteint la case
+        return true;
     }
+    return false;
+}
     
     public boolean estTermine() {
         for(int[] row : damier) for(int val : row) if(val == 1) return false;
