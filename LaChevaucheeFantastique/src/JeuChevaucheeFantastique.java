@@ -99,7 +99,7 @@ public class JeuChevaucheeFantastique {
         Random rand = new Random();
         int r = rand.nextInt(taille);
         int c = rand.nextInt(taille);
-        damier[r][c] = 1; // Case de départ
+        damier[r][c] = 1; 
         
         int[][] sauts = {{2,1},{2,-1},{-2,1},{-2,-1},{1,2},{1,-2},{-1,2},{-1,-2}};
         for (int i = 0; i < 10; i++) {
