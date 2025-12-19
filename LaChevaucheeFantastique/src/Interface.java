@@ -30,27 +30,35 @@ public class Interface extends javax.swing.JFrame {
         this.getContentPane().setLayout(new GridLayout(t, t));
 
         for (int i = 0; i < t; i++) {
-            for (int j = 0; j < t; j++) {
-                final int r = i;
-                final int c = j;
-                grille[i][j] = new CelluleGraphique();
+        for (int j = 0; j < t; j++) {
+            final int r = i;
+            final int c = j;
+            grille[i][j] = new CelluleGraphique();
+            
+            grille[i][j].addActionListener(e -> {
                 
-                grille[i][j].addActionListener(e -> {
-                    if (jeu.deplacerCavalier(r, c)) {
-                        if (jeu.estTermine()) {
-                            JOptionPane.showMessageDialog(this, "Niveau Gagné !");
-                            jeu.initialiserNiveau(jeu.getNiveauActuel() + 1);
-                        }
+                if (jeu.deplacerCavalier(r, c)) {
+                    rafraichir();
+                    
+                    if (jeu.estTermine()) {
+                        JOptionPane.showMessageDialog(this, "Niveau Gagné !");
+                        jeu.initialiserNiveau(jeu.getNiveauActuel() + 1);
+                        rafraichir();
+                    } 
+                    else if (!jeu.peutEncoreJouer()) {
+                        JOptionPane.showMessageDialog(this, "Bloqué ! Plus de mouvements possibles. Recommençons.");
+                        jeu.initialiserNiveau(jeu.getNiveauActuel()); 
                         rafraichir();
                     }
-                });
-                this.getContentPane().add(grille[i][j]);
-            }
+                }
+            });
+            this.getContentPane().add(grille[i][j]);
         }
-        
-        rafraichir();
-        this.setSize(600, 600);
     }
+    
+    rafraichir();
+    this.setSize(600, 600);
+}
     
     private void rafraichir() {
         Case cp = jeu.getPosCavalier();

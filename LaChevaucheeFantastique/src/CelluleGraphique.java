@@ -47,8 +47,8 @@ public class CelluleGraphique extends JButton {
 
         if (estCavalier) {
             g.setColor(new Color(250, 230, 50)); 
-            g.setFont(new Font("Arial", Font.BOLD, 45));
-            g.drawString("o", getWidth()/4, (int)(getHeight()/1.6));
+            g.setFont(new Font("Serif", Font.BOLD, 50));
+            g.drawString("\u265E", getWidth()/4, (int)(getHeight()/1.3));
         }
         
         g.setColor(new Color(200, 0, 150)); 
