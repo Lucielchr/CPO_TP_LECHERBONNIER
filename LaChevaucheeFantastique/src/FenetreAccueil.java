@@ -32,6 +32,7 @@ public class FenetreAccueil extends javax.swing.JFrame {
 
         txt_accueil = new javax.swing.JLabel();
         btn_jouer = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -39,7 +40,7 @@ public class FenetreAccueil extends javax.swing.JFrame {
         txt_accueil.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         txt_accueil.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt_accueil.setText("Bienvenu sur la chevauchée fantastique");
-        getContentPane().add(txt_accueil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 400, -1));
+        getContentPane().add(txt_accueil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 400, -1));
 
         btn_jouer.setText("Jouer");
         btn_jouer.addActionListener(new java.awt.event.ActionListener() {
@@ -47,7 +48,10 @@ public class FenetreAccueil extends javax.swing.JFrame {
                 btn_jouerActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_jouer, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, -1, -1));
+        getContentPane().add(btn_jouer, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 60, -1));
+
+        jLabel1.setText(" ");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 50, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -85,6 +89,7 @@ public class FenetreAccueil extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_jouer;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel txt_accueil;
     // End of variables declaration//GEN-END:variables
 }
