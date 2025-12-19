@@ -73,14 +73,44 @@ public class JeuChevaucheeFantastique {
     return false;
 }
     
+    public boolean peutEncoreJouer() {
+        if (estTermine()) return true; 
+        
+        int r = posCavalier.getLigne();
+        int c = posCavalier.getColonne();
+        int[][] sauts = {{2,1},{2,-1},{-2,1},{-2,-1},{1,2},{1,-2},{-1,2},{-1,-2}};
+        
+        for (int[] s : sauts) {
+            int nr = r + s[0];
+            int nc = c + s[1];
+            if (nr >= 0 && nr < taille && nc >= 0 && nc < taille) {
+                if (damier[nr][nc] == 1) return true;
+            }
+        }
+        return false;
+    }
+    
     public boolean estTermine() {
         for(int[] row : damier) for(int val : row) if(val == 1) return false;
         return true;
     }
     
     private void genererAleatoire() {
-        Random r = new Random();
-        for(int i=0; i<8; i++) damier[r.nextInt(taille)][r.nextInt(taille)] = 1;
+        Random rand = new Random();
+        int r = rand.nextInt(taille);
+        int c = rand.nextInt(taille);
+        damier[r][c] = 1; // Case de départ
+        
+        int[][] sauts = {{2,1},{2,-1},{-2,1},{-2,-1},{1,2},{1,-2},{-1,2},{-1,-2}};
+        for (int i = 0; i < 10; i++) {
+            int[] s = sauts[rand.nextInt(8)];
+            int nr = r + s[0];
+            int nc = c + s[1];
+            if (nr >= 0 && nr < taille && nc >= 0 && nc < taille) {
+                damier[nr][nc] = 1;
+                r = nr; c = nc;
+            }
+        }
     }
     
     public int getTaille() {
